@@ -14,7 +14,8 @@
 
 #!/bin/bash
 
-OUTPUT_DIR=/tmp/pouring_tfrecords/
+#OUTPUT_DIR=/tmp/pouring_tfrecords/
+OUTPUT_DIR=/home/srikrishna/ClearVid_work/google-research/tcc/data/pouring_data
 mkdir -p "${OUTPUT_DIR}"
 wget -P "${OUTPUT_DIR}" https://storage.googleapis.com/tcc-pouring/pouring_train-0-of-2.tfrecord
 wget -P "${OUTPUT_DIR}" https://storage.googleapis.com/tcc-pouring/pouring_train-1-of-2.tfrecord

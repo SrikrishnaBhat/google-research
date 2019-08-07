@@ -280,6 +280,9 @@ def get_tfrecords(dataset, split, path, per_class=False):
     logging.info('Loading %s data from: %s', split, path_to_tfrecords)
     tfrecord_files = sorted(tf.io.gfile.glob(path_to_tfrecords))
   else:
+    print('Dataset path')
+    print(path, dataset)
+    print('%s_%s*' % (dataset, split))
     path_to_tfrecords = os.path.join(path % dataset,
                                      '%s_%s*' % (dataset, split))
 
@@ -330,10 +333,12 @@ def create_dataset(split, mode, batch_size=None, return_iterator=True):
   # pylint: enable=g-long-lambda
 
   fraction = CONFIG.DATA.PER_DATASET_FRACTION
+  CONFIG.PATH_TO_TFRECORDS = '/home/srikrishna/ClearVid_work/google-research/tcc/data/%s_data/'
 
   datasets = []
   with tf.device('/cpu:0'):
     for dataset_name in CONFIG.DATASETS:
+      print(CONFIG.PATH_TO_TFRECORDS)
       tfrecord_files = get_tfrecords(
           dataset_name, split, CONFIG.PATH_TO_TFRECORDS, per_class=per_class)
       dataset = tf.data.TFRecordDataset(

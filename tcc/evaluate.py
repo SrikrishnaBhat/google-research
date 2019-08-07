@@ -26,11 +26,15 @@ from absl import flags
 
 import tensorflow.compat.v2 as tf
 
+import sys
+print(sys.path)
+
 from tcc.algorithms import get_algo
 from tcc.config import CONFIG
 from tcc.datasets import create_dataset
 from tcc.datasets import create_one_epoch_dataset
 from tcc.tasks import get_tasks
+
 
 from tcc.utils import get_embeddings_dataset
 from tcc.utils import get_lr_opt_global_step
@@ -42,7 +46,8 @@ layers = tf.keras.layers
 
 
 flags.DEFINE_boolean('continuous_eval', True, 'Evaluate continously.')
-flags.DEFINE_string('logdir', '/tmp/alignment_logs', 'Path to logs.')
+# flags.DEFINE_string('logdir', '/tmp/alignment_logs', 'Path to logs.')
+flags.DEFINE_string('logdir', '/home/srikrishna/ClearVid_work/google-research/tcc/alignment_logs', 'Path to logs.')
 flags.DEFINE_boolean('defun', True, 'Defun everything!')
 flags.DEFINE_boolean('visualize', False, 'Visualize images. Switched off by '
                      'for default to speed traininig up and take less memory.')
@@ -128,6 +133,7 @@ def evaluate():
   """Evaluate embeddings."""
   CONFIG.LOGDIR = FLAGS.logdir
   logdir = CONFIG.LOGDIR
+  print(logdir)
   setup_eval_dir(logdir)
 
   algo = get_algo(CONFIG.TRAINING_ALGO)
